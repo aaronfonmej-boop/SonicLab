@@ -1,0 +1,80 @@
+{
+  "schemaVersion": 3,
+  "contentVersion": "1.1.0",
+  "minimumAppVersion": "1.1.0-academia-continua",
+  "language": "es",
+  "reviewedAt": "2026-08-15",
+  "editorialStatus": "published",
+  "catalogImplementation": "typed-kotlin-with-versioned-asset-index",
+  "counts": {
+    "paths": 6,
+    "levels": 3,
+    "guides": 34,
+    "practices": 20,
+    "faq": 66
+  },
+  "paths": [
+    {
+      "id": "fundamentals",
+      "guideIds": ["g01_oscillation", "g02_frequency_wavelength", "g03_pressure_level", "g04_superposition", "g05_standing_waves", "g06_resonance"]
+    },
+    {
+      "id": "signals",
+      "guideIds": ["g07_time_frequency", "g08_harmonics", "g09_fft", "g10_sampling", "g11_signal_chain", "g12_signal_export"]
+    },
+    {
+      "id": "voice_hearing",
+      "guideIds": ["g13_voice_source_filter", "g14_voice_harmonics", "g15_dbfs_spl", "g16_microphone_distance", "g17_voice_spectrum", "g18_hearing_safety"]
+    },
+    {
+      "id": "rooms_noise",
+      "guideIds": ["g19_reflection_absorption", "g20_room_modes", "g21_low_frequency", "g22_reverberation", "g23_environmental_noise", "g24_room_comparison"]
+    },
+    {
+      "id": "vibrations",
+      "guideIds": ["g25_air_plate", "g26_plate_modes", "g27_plate_coupling", "g28_plate_scaling", "g29_plate_response", "g30_sand_nodes"]
+    },
+    {
+      "id": "methods_data",
+      "guideIds": ["g31_control_variables", "g32_uncertainty", "g33_parameter_sweep", "g34_reproducible_report"]
+    }
+  ],
+  "legacyPracticeIds": [
+    "wave_particle",
+    "frequency_wavelength",
+    "interference",
+    "harmonics",
+    "cymatics_nodes",
+    "cymatics_resonance",
+    "cymatics_geometry",
+    "cymatics_coupling"
+  ],
+  "practiceIds": [
+    "wave_particle",
+    "frequency_wavelength",
+    "interference",
+    "harmonics",
+    "cymatics_nodes",
+    "cymatics_resonance",
+    "cymatics_geometry",
+    "cymatics_coupling",
+    "temperature_wavelength",
+    "phase_map",
+    "beats",
+    "room_standing_modes",
+    "level_units",
+    "mic_noise_dbfs",
+    "calibration_limits",
+    "educational_voice",
+    "room_dimensions",
+    "reverberation_absorption",
+    "plate_scaling",
+    "reproducible_sweep"
+  ],
+  "scientificKinds": ["simulation", "measurement", "visualization", "educational", "mixed"],
+  "sourceFiles": {
+    "guidesAndPractices": "academic/LearningCatalog.kt",
+    "faq": "academic/LearningFaqCatalog.kt",
+    "models": "academic/LearningModels.kt"
+  }
+}

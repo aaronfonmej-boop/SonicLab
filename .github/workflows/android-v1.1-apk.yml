@@ -1,0 +1,82 @@
+name: Build SonicLab 3D v1.1 APK
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  build-apk:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Configure Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+          cache: gradle
+
+      - name: Preserve debug signing key between builds
+        uses: actions/cache@v4
+        with:
+          path: ~/.android/debug.keystore
+          key: soniclab-debug-signing-v1
+
+      - name: Configure Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Install Android API 35
+        shell: bash
+        run: |
+          yes | sdkmanager --licenses >/dev/null || true
+          sdkmanager "platform-tools" "platforms;android-35" "build-tools;35.0.0"
+
+      - name: Validate learning content
+        run: python3 tools/validate_learning_content.py
+
+      - name: Build and test
+        env:
+          GRADLE_OPTS: -Dorg.gradle.daemon=false -Dkotlin.incremental=false
+        run: |
+          chmod +x gradlew
+          ./gradlew --no-daemon clean testDebugUnitTest lintDebug assembleDebug --stacktrace
+
+      - name: Verify and package APK
+        shell: bash
+        run: |
+          mkdir -p dist
+          source_apk="app/build/outputs/apk/debug/app-debug.apk"
+          final_apk="dist/SonicLab3D-Science-v1.1-academia-continua.apk"
+          test -s "$source_apk"
+          cp "$source_apk" "$final_apk"
+          "$ANDROID_HOME/build-tools/35.0.0/apksigner" verify --verbose --print-certs "$final_apk"
+          "$ANDROID_HOME/build-tools/35.0.0/aapt" dump badging "$final_apk" | tee dist/APK_METADATA-v1.1.txt
+          grep -Fq "package: name='com.soniclab3d' versionCode='11' versionName='1.1.0-academia-continua'" dist/APK_METADATA-v1.1.txt
+          sha256sum "$final_apk" | tee dist/SHA256SUMS-v1.1.txt
+
+      - name: Upload verified APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: SonicLab3D-Science-v1.1-academia-continua
+          path: dist/
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Upload validation reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: SonicLab-validation-reports
+          path: |
+            app/build/reports/
+            app/build/test-results/
+          if-no-files-found: ignore

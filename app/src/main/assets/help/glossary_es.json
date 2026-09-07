@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "contentVersion": "1.1.0",
+  "language": "es",
+  "entries": [
+    {"term": "dBFS", "definition": "Nivel relativo al máximo representable en una cadena digital; no es dB SPL."},
+    {"term": "dB SPL", "definition": "Nivel de presión sonora referido a 20 µPa; una lectura absoluta requiere calibración aplicable."},
+    {"term": "Frecuencia propia", "definition": "Frecuencia asociada a un modo del sistema bajo condiciones declaradas."},
+    {"term": "Nodo", "definition": "Región donde la variable modal observada tiene amplitud cercana a cero."},
+    {"term": "Resonancia", "definition": "Respuesta elevada cerca de una frecuencia propia, limitada por pérdidas y acoplamiento."},
+    {"term": "a.u.", "definition": "Unidades arbitrarias o normalizadas sin escala física trazable."}
+  ]
+}

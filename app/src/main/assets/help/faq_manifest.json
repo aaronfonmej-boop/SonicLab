@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 3,
+  "contentVersion": "1.1.0",
+  "language": "es",
+  "reviewedAt": "2026-08-15",
+  "editorialStatus": "published",
+  "totalEntries": 66,
+  "groups": [
+    {"pathId": "fundamentals", "idPrefix": "faq_fund_", "count": 10},
+    {"pathId": "signals", "idPrefix": "faq_sig_", "count": 10},
+    {"pathId": "voice_hearing", "idPrefix": "faq_voice_", "count": 10},
+    {"pathId": "rooms_noise", "idPrefix": "faq_room_", "count": 10},
+    {"pathId": "vibrations", "idPrefix": "faq_plate_", "count": 10},
+    {"pathId": "methods_data", "idPrefix": "faq_method_", "count": 10},
+    {"pathId": "methods_data", "idPrefix": "faq_app_", "count": 6}
+  ],
+  "fallbackPolicy": "show-related-curated-content-never-generate-an-answer",
+  "sourceFile": "academic/LearningFaqCatalog.kt"
+}

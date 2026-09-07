@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 3,
+  "institutionId": "generic",
+  "catalogId": "core_acoustics_es",
+  "catalogVersion": "1.1.0",
+  "reviewedAt": "2026-08-15",
+  "sourceUrl": null,
+  "sourceTitle": "Ruta genérica de acústica universitaria en español",
+  "sourceEdition": "1.1",
+  "officialEndorsement": false,
+  "notes": "Paquete transversal; los semestres sugeridos son orientativos.",
+  "pathIds": ["fundamentals", "signals", "voice_hearing", "rooms_noise", "vibrations", "methods_data"]
+}

@@ -1,0 +1,74 @@
+{
+  "schemaVersion": 3,
+  "institutionId": "unap_cl",
+  "catalogId": "unap_2026",
+  "catalogVersion": "2026-08-15",
+  "reviewedAt": "2026-08-15",
+  "sourceUrl": "https://www.admisionunap.cl/oferta-academica?oferta=1",
+  "sourceTitle": "Oferta académica y mallas publicadas por Admisión UNAP",
+  "sourceEdition": "Oferta Admisión 2026; las mallas vigentes de Arquitectura y Fonoaudiología enlazadas por el sitio rotulan PUNTAJES 2025",
+  "officialEndorsement": false,
+  "notes": "Alineación orientativa. No constituye homologación, respaldo institucional ni reemplazo de una malla oficial actualizada. Las páginas advierten que los planes pueden modificarse por mejoramiento continuo.",
+  "verificationNotes": "La oferta, Computación, Ambiental, Arquitectura y Fonoaudiología respondieron en admisionunap.cl el 15-08-2026. Los PDF 150107, 150906 y 171111 estaban enlazados; 150906 y 171111 mostraron PUNTAJES 2025.",
+  "sources": [
+    {"title": "Oferta académica UNAP", "url": "https://www.admisionunap.cl/oferta-academica?oferta=1"},
+    {"title": "Ingeniería Civil en Computación e Informática", "url": "https://www.admisionunap.cl/detalle-carrera?carrera=22"},
+    {"title": "Malla publicada de Computación e Informática", "url": "https://www.admisionunap.cl/assets/mallas/150107.pdf"},
+    {"title": "Ingeniería Civil Ambiental", "url": "https://www.admisionunap.cl/detalle-carrera?carrera=23"},
+    {"title": "Arquitectura", "url": "https://www.admisionunap.cl/detalle-carrera?carrera=24"},
+    {"title": "Malla publicada de Arquitectura", "url": "https://www.admisionunap.cl/assets/mallas/150906.pdf"},
+    {"title": "Fonoaudiología", "url": "https://www.admisionunap.cl/detalle-carrera?carrera=16"},
+    {"title": "Malla publicada de Fonoaudiología", "url": "https://www.admisionunap.cl/assets/mallas/171111.pdf"}
+  ],
+  "alignments": [
+    {
+      "careerId": "pedagogia_matematica_fisica",
+      "careerName": "Pedagogía en Matemática y Física",
+      "relevance": "direct",
+      "pathIds": ["fundamentals", "vibrations", "methods_data"],
+      "relatedAxes": ["física", "ondas", "oscilaciones", "laboratorio"]
+    },
+    {
+      "careerId": "ingenieria_civil_electronica",
+      "careerName": "Ingeniería Civil Electrónica",
+      "relevance": "direct",
+      "pathIds": ["fundamentals", "signals", "vibrations", "methods_data"],
+      "relatedAxes": ["señales", "sensores", "electrónica", "telecomunicaciones"]
+    },
+    {
+      "careerId": "ingenieria_civil_computacion_informatica",
+      "careerName": "Ingeniería Civil en Computación e Informática",
+      "relevance": "complementary",
+      "pathIds": ["signals", "methods_data"],
+      "relatedAxes": ["muestreo", "datos", "automatización", "investigación y proyectos"]
+    },
+    {
+      "careerId": "fonoaudiologia",
+      "careerName": "Fonoaudiología",
+      "relevance": "direct",
+      "pathIds": ["fundamentals", "voice_hearing", "signals", "methods_data"],
+      "relatedAxes": ["Física Acústica", "audiología", "voz", "oído", "laboratorio", "bioestadística"]
+    },
+    {
+      "careerId": "arquitectura",
+      "careerName": "Arquitectura",
+      "relevance": "direct",
+      "pathIds": ["fundamentals", "rooms_noise", "vibrations", "methods_data"],
+      "relatedAxes": ["Física Ambiental", "Física Estática", "estructuras", "instalaciones", "metodología"]
+    },
+    {
+      "careerId": "ingenieria_civil_ambiental",
+      "careerName": "Ingeniería Civil Ambiental",
+      "relevance": "complementary",
+      "pathIds": ["rooms_noise", "methods_data"],
+      "relatedAxes": ["ruido ambiental", "evaluación de variables", "datos"]
+    },
+    {
+      "careerId": "kinesiologia",
+      "careerName": "Kinesiología",
+      "relevance": "exploratory",
+      "pathIds": ["fundamentals", "voice_hearing"],
+      "relatedAxes": ["ondas", "señales fisiológicas como contexto educativo no clínico"]
+    }
+  ]
+}
