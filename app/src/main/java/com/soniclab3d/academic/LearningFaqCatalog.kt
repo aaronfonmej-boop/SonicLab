@@ -12,16 +12,6 @@ internal object LearningFaqCatalog {
         val limitation: String? = null
     )
 
-    val all: List<FaqEntry> = buildList {
-        addAll(group(LearningPath.FUNDAMENTALS, "fund", fundamentals))
-        addAll(group(LearningPath.SIGNALS, "sig", signals))
-        addAll(group(LearningPath.VOICE_HEARING, "voice", voice))
-        addAll(group(LearningPath.ROOMS_NOISE, "room", rooms))
-        addAll(group(LearningPath.VIBRATIONS, "plate", vibrations))
-        addAll(group(LearningPath.METHODS_DATA, "method", methods))
-        addAll(group(LearningPath.METHODS_DATA, "app", appHelp))
-    }
-
     private fun group(path: LearningPath, prefix: String, seeds: List<Seed>): List<FaqEntry> =
         seeds.mapIndexed { index, seed ->
             FaqEntry(
@@ -467,4 +457,15 @@ internal object LearningFaqCatalog {
             limitation = "Una muerte completa del proceso puede descartar la instantánea visual de la escena."
         )
     )
+
+    val all: List<FaqEntry> = buildList {
+        addAll(group(LearningPath.FUNDAMENTALS, "fund", fundamentals))
+        addAll(group(LearningPath.SIGNALS, "sig", signals))
+        addAll(group(LearningPath.VOICE_HEARING, "voice", voice))
+        addAll(group(LearningPath.ROOMS_NOISE, "room", rooms))
+        addAll(group(LearningPath.VIBRATIONS, "plate", vibrations))
+        addAll(group(LearningPath.METHODS_DATA, "method", methods))
+        addAll(group(LearningPath.METHODS_DATA, "app", appHelp))
+    }
+
 }

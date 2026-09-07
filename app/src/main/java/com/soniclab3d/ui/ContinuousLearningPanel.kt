@@ -30,7 +30,6 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -64,7 +63,6 @@ import com.soniclab3d.ui.theme.SonicPalette
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
-import kotlinx.coroutines.delay
 
 private enum class LearningSection(val label: String) {
     PATHS("Rutas"),
@@ -423,41 +421,38 @@ private fun PracticeDetail(
 ) {
     val phase = experience.learning.phaseFor(practice.id)
     val persistedDraft = experience.learning.practiceDrafts[practice.id]
-    var prediction by rememberSaveable(practice.id, persistedDraft?.attempt) {
+    val attempt = persistedDraft?.attempt ?: 1
+    var prediction by rememberSaveable(practice.id, attempt) {
         mutableStateOf(persistedDraft?.prediction.orEmpty())
     }
-    var evidence by rememberSaveable(practice.id, persistedDraft?.attempt) {
+    var evidence by rememberSaveable(practice.id, attempt) {
         mutableStateOf(persistedDraft?.evidence.orEmpty())
     }
-    var answer by rememberSaveable(practice.id, persistedDraft?.attempt) {
+    var answer by rememberSaveable(practice.id, attempt) {
         mutableStateOf(persistedDraft?.analysis ?: experience.answers[practice.id].orEmpty())
     }
-    var reflection by rememberSaveable(practice.id, persistedDraft?.attempt) {
+    var reflection by rememberSaveable(practice.id, attempt) {
         mutableStateOf(persistedDraft?.reflection.orEmpty())
     }
     var showHint by rememberSaveable(practice.id) { mutableStateOf(false) }
     var doubtText by rememberSaveable(practice.id) { mutableStateOf("") }
     var confirmReset by rememberSaveable(practice.id) { mutableStateOf(false) }
     val phaseProgress = (phase.ordinal + 1).toFloat() / PracticePhase.entries.size
-    LaunchedEffect(practice.id, prediction, evidence, answer, reflection) {
-        delay(550)
-        val changed = persistedDraft == null ||
-            persistedDraft.prediction != prediction || persistedDraft.evidence != evidence ||
-            persistedDraft.analysis != answer || persistedDraft.reflection != reflection
-        if (changed && listOf(prediction, evidence, answer, reflection).any { it.isNotBlank() }) {
-            onSavePracticeDraft(
-                PracticeDraft(
-                    practiceId = practice.id,
-                    updatedAtEpochMs = System.currentTimeMillis(),
-                    prediction = prediction,
-                    evidence = evidence,
-                    analysis = answer,
-                    reflection = reflection,
-                    attempt = persistedDraft?.attempt ?: 1,
-                    status = persistedDraft?.status ?: com.soniclab3d.academic.PracticeWorkStatus.DRAFT
-                )
+    // Save from the input event so changing tabs cannot cancel a delayed save.
+    // Empty values are intentional edits and must replace the previous draft too.
+    fun saveDraft() {
+        onSavePracticeDraft(
+            PracticeDraft(
+                practiceId = practice.id,
+                updatedAtEpochMs = System.currentTimeMillis(),
+                prediction = prediction,
+                evidence = evidence,
+                analysis = answer,
+                reflection = reflection,
+                attempt = attempt,
+                status = persistedDraft?.status ?: com.soniclab3d.academic.PracticeWorkStatus.DRAFT
             )
-        }
+        )
     }
     ContentCard(accent = SonicPalette.Violet) {
         MetaRow(practice.level.label, practice.domain.label, "${practice.estimatedMinutes} min", practice.scientificKind.label)
@@ -484,7 +479,7 @@ private fun PracticeDetail(
             }
             PracticePhase.PREDICT -> OutlinedTextField(
                 value = prediction,
-                onValueChange = { prediction = it.take(2_000) },
+                onValueChange = { prediction = it.take(2_000); saveDraft() },
                 label = { Text("¿Qué esperas observar y por qué?") },
                 modifier = Modifier.fillMaxWidth(),
                 minLines = 3
@@ -501,7 +496,7 @@ private fun PracticeDetail(
             }
             PracticePhase.RECORD -> OutlinedTextField(
                 value = evidence,
-                onValueChange = { evidence = it.take(4_000) },
+                onValueChange = { evidence = it.take(4_000); saveDraft() },
                 label = { Text(practice.evidencePrompt) },
                 modifier = Modifier.fillMaxWidth(),
                 minLines = 4
@@ -510,7 +505,7 @@ private fun PracticeDetail(
                 Text(practice.question, color = SonicPalette.Ice, fontWeight = FontWeight.SemiBold)
                 OutlinedTextField(
                     value = answer,
-                    onValueChange = { answer = it.take(4_000) },
+                    onValueChange = { answer = it.take(4_000); saveDraft() },
                     label = { Text("Análisis") },
                     modifier = Modifier.fillMaxWidth(),
                     minLines = 4
@@ -536,7 +531,7 @@ private fun PracticeDetail(
                 )
                 OutlinedTextField(
                     value = reflection,
-                    onValueChange = { reflection = it.take(4_000) },
+                    onValueChange = { reflection = it.take(4_000); saveDraft() },
                     label = { Text("¿Qué aprendiste y qué investigarías después?") },
                     modifier = Modifier.fillMaxWidth(),
                     minLines = 3
